@@ -1,21 +1,16 @@
-<?php
+<?php  
+$host = 'localhost';  
+$dbname = 'estoque';  
+$user = 'root';  
+$password = '&tec77@info!';  
 
-$host = 'localhost'; 
-$dbname = 'estoque';
-$user = 'root'; 
-$password = 'root'; 
+// Create connection
+$conn = new mysqli($host, $user, $password, $dbname);
 
-try {
-
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb3", $user, $password);
-    
-
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+// Check connection
+if ($conn->connect_error) {
+    die("Erro na conexão: " . $conn->connect_error);
+} else {
     echo "Conexão bem-sucedida!";
-
-} catch (PDOException $e) {
-    echo "Erro na conexão: " . $e->getMessage();
 }
-
 ?>
