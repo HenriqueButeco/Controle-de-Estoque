@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha'];
     $tipo_usuario = $_POST['tipo_usuario'];
 
-    // Busca o usuário no banco
+    // Busca o usuário no banco:
     $sql = $conn->prepare("SELECT senha, tipo_de_usuario FROM estoque.cadastro_usuário WHERE email = ?");
     $sql->bind_param("s", $email);
     $sql->execute();
@@ -15,11 +15,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($senha == $senha_banco) {
         if ($tipo_usuario == $tipo_usuario_banco) {
-            // Redireciona conforme o tipo de usuário
+            // Redireciona conforme o tipo de usuário:
             if ($tipo_usuario == 1) {
-                header("Location: admin/adm.php");
+                header("Location: \Controle-de-Estoque\Frontend\admin\adm.php");
             } else {
-                header("Location: user/user.php"); 
+                header("Location: \Controle-de-Estoque\Frontend\user\user.php"); 
             }
         } else {
             echo "Tipo de usuário incorreto!";

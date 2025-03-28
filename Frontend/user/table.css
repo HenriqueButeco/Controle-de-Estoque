@@ -1,0 +1,33 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: url('/Controle-de-estoque/images/bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: aliceblue;
+}
+th, td {
+    border: 1px solid #e6526a;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color:  rgba(209, 98, 124, 0.6);
+}
+.bnt {
+width: 10%;
+padding: 12px;
+background-color: #e6526a;
+color: #fff;
+font-size: 18px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+transition: background-color 0.3s ease;
+text-align: center;
+}   
