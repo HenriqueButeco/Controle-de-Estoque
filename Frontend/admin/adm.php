@@ -22,7 +22,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="..\css\table.css">
     <title>Estoque de Produtos</title>
 </head>
 <body>
@@ -37,6 +37,13 @@ $result = $conn->query($sql);
         <th>Quantidade</th>
         <th>Data de Cadastro</th>
     </tr>
+    <br>
+    <div class="button">
+    <button type="submit" class="bnt">Editar</button> 
+    <button type="submit" class="bnt">Excluir</button> 
+    <button type="submit" class="bnt">Vizualizar</button>
+    </div>
+    <br>
 
     <?php
     if ($result->num_rows > 0) {

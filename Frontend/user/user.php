@@ -22,7 +22,7 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="table.css">
+    <link rel="stylesheet" href="..\css\table.css">
     <title>Estoque de Produtos</title>
 </head>
 <body>
