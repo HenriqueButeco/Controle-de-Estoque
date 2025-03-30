@@ -50,7 +50,7 @@ CONTROLE-DE-ESTOQUE/
 ### **Requisitos** 
 - Servidor Apache 
 - PHP 8.2.0 
-- MySQL  9.2.0
+- MySQL  8.0.41.
 ### **Instalação** 
 1. Clone o repositório: 
  bash
