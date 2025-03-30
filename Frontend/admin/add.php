@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <h2>Adicionar Produto</h2>
-<form method="POST">
+<form method="POST" onsubmit="return validarFormulario()">
     <input type="text" name="marca" placeholder="Marca" required>
     <input type="text" name="colecao" placeholder="Coleção" required>
     <input type="text" name="nome_cor" placeholder="Nome da Cor" required>
@@ -33,3 +33,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <button type="submit">Adicionar Produto</button>
 </form>
 <a href="index.php">Voltar</a>
+
+<script src="add.js"></script>
