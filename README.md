@@ -11,18 +11,41 @@
                  Henrique dos Santos Pinto.
 - **Data de início:** 17/03/2025 
 ## 2 Estrutura do Projeto 
-/projeto-raiz 
-│── /public # Arquivos acessíveis publicamente (index.php, CSS, JS) 
-│── /app # Código principal da aplicação 
-│ │── /Controllers # Lógica de controle 
-│ │── /Models # Conexão com banco de dados e regras de negócio 
-│ │── /Views # Arquivos de interface (HTML, PHP) 
-│── /config # Configurações do projeto 
-│── /database # Scripts SQL para criação e população do banco 
-│── /tests # Testes automatizados 
-│── .env # Variáveis de ambiente 
-│── composer.json # Dependências do projeto 
-│── README.md # Documentação inicial 
+CONTROLE-DE-ESTOQUE/
+│── Backend/
+│   │── cadastro.php
+│   │── conexao.php
+│   │── login.php
+|
+│── Bd/
+│    └── Dump_estoque_18_03.sql
+│
+│── Frontend/
+│   │── admin/
+│   │   │── add.js
+│   │   │── add.php
+│   │   │── adm.php
+│   │   │── edit.js
+│   │   │── edit.php
+│   │   └── excluir.php
+│   │
+│   │── css/
+│   │   │── style.css
+│   │   └── table.css
+│   │
+│   │── user/
+│   │   │── user.php
+│   │   └── cadast.js
+│   │
+│   │── cadastro.html
+│   │── login.html
+│   │── login.js
+│
+│── images/
+│   └── bg.jpg
+│
+│── README.md
+
 ## 3 Configuração do Ambiente 
 ### **Requisitos** 
 - Servidor Apache 
@@ -31,51 +54,72 @@
 ### **Instalação** 
 1. Clone o repositório: 
  bash
- git clone https://github.com/usuario/projeto.git
- cd projeto
+ git clone https://github.com/HenriqueButeco/Controle-de-Estoque.git
+ cd Controle-de-Estoque
  
 2. Instale as dependências: 
- bash
- composer install
+ bash;
  
 3. Configure o banco de dados: 
  - Crie o banco no MySQL 
- - Execute o script SQL: 
- sql
- source database/schema.sql;
+ - Execute o Dump SQL;
  
- - Configure as credenciais no `.env` 
+ - Configure as credenciais no `conexao.php` 
 4. Inicie o servidor: 
 bash
  php -S localhost:8000 -t public
 ## 4 Estrutura do Banco de Dados 
-### **Usuários (users)** 
-- `id` (INT, PK, AUTO_INCREMENT) 
-- `nome` (VARCHAR) 
-- `email` (VARCHAR, UNIQUE) 
-- `senha` (VARCHAR) 
-### **Posts (posts)** 
-- `id` (INT, PK, AUTO_INCREMENT) 
-- `titulo` (VARCHAR) 
-- `conteudo` (TEXT) 
-- `usuario_id` (FK -> users.id) 
-## 5 Rotas da Aplicação 
-| Método | Rota | Descrição | 
-|--------|-----------|----------------------------| 
-| GET | `/` | Página inicial | 
-| GET | `/login` | Tela de login | 
-| POST | `/login` | Autenticação do usuário | 
-| GET | `/posts` | Lista todos os posts | 
-| POST | `/posts` | Cria um novo post | 
-## 6 Segurança e Boas Práticas 
-- Hash de senhas com `password_hash()` 
-- Proteção contra SQL Injection com **PDO e prepared statements** 
-- Proteção contra CSRF com tokens 
-- Validação e sanitização de entrada de dados 
-## 7 Testes 
-- Testes de unidade com PHPUnit 
-- Testes de integração das rotas principais 
-## 8 Deploy e Hospedagem 
+-- Schema estoque
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `estoque` DEFAULT CHARACTER SET utf8mb3 ;
+USE `estoque` 
+-- -----------------------------------------------------
+-- Table `estoque`.`tipo_de_usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `estoque`.`tipo_de_usuario` (
+  `id` INT NOT NULL,
+  `tipo` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb3;
+-- -----------------------------------------------------
+-- Table `estoque`.`cadastro_usuário`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `estoque`.`cadastro_usuário` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(120) NOT NULL,
+  `senha` VARCHAR(30) NOT NULL,
+  `tipo_de_usuario` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_Cadastro_Usuário_tipo_de_usuario_idx` (`tipo_de_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_Cadastro_Usuário_tipo_de_usuario`
+    FOREIGN KEY (`tipo_de_usuario`)
+    REFERENCES `estoque`.`tipo_de_usuario` (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 7
+DEFAULT CHARACTER SET = utf8mb3;
+-- -----------------------------------------------------
+-- Table `estoque`.`produto_estoque`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `estoque`.`produto_estoque` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `marca` VARCHAR(60) NOT NULL,
+  `colecao` VARCHAR(95) NOT NULL,
+  `Nome_da_Cor` VARCHAR(60) NOT NULL,
+  `quantidade` INT NOT NULL,
+  `data_de_cadastro` DATE NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 27
+DEFAULT CHARACTER SET = utf8mb3;
+
+## 5 Segurança e Boas Práticas 
+- Validação e sanitização de entrada de dados
+- 
+## 6 Testes 
+- Testes manuais de casos de uso.
+- 
+## 7 Deploy e Hospedagem 
 ### **Configuração no Servidor** 
 1. Configure um servidor Apache/Nginx 
 2. Defina permissões corretas nas pastas 
