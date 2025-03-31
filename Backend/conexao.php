@@ -2,7 +2,7 @@
 $host = 'localhost';  
 $dbname = 'estoque';  
 $user = 'root';  
-$password = 'root';  
+$password = '&tec77@info!';  
 
 $conn = new mysqli($host, $user, $password, $dbname);
 

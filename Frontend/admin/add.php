@@ -2,7 +2,7 @@
 $host = 'localhost';  
 $dbname = 'estoque';  
 $user = 'root';  
-$password = 'root';  
+$password = '&tec77@info!';  
 $conn = new mysqli($host, $user, $password, $dbname);
 
 if ($conn->connect_error) {
@@ -24,29 +24,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href=..\css\table.css>
-    <title>Adicionar</title>
+    <link rel="stylesheet" href="..\css\addEdit.css">
+    <title>Adicionar Produto</title>
 </head>
+
 <body>
     
-
-<h2>Adicionar Produto</h2>
-<form method="POST" onsubmit="return validarFormulario()">
-    <input type="text" name="marca" placeholder="Marca" required>
-    <input type="text" name="colecao" placeholder="Coleção" required>
-    <input type="text" name="nome_cor" placeholder="Nome da Cor" required>
-    <input type="number" name="quantidade" placeholder="Quantidade" required>
-    <button type="submit">Adicionar Produto</button>
-</form>
-<a href="index.php">Voltar</a>
-
+    <div class="form-container">
+        <h2>Adicionar Produto</h2>
+        <form method="POST" onsubmit="return validarFormulario()">
+            <div class="input-group">
+                <input type="text" name="marca" placeholder="Marca" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="colecao" placeholder="Coleção" required>
+            </div>
+            <div class="input-group">
+                <input type="text" name="nome_cor" placeholder="Nome da Cor" required>
+            </div>
+            <div class="input-group">
+                <input type="number" name="quantidade" placeholder="Quantidade" required>
+            </div>
+            <button type="submit" class="submit-button">Adicionar Produto</button>
+        </form>
+        <a href="adm.php" class="back-link">Voltar</a>
+    </div>
+    <script src="add.js"></script>
 </body>
-<script src="add.js"></script>
 </html>
-
 

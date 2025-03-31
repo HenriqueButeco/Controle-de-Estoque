@@ -2,15 +2,29 @@
 $host = 'localhost';  
 $dbname = 'estoque';  
 $user = 'root';  
-$password = 'root';  
+$password = '&tec77@info!';  
 
 $conn = new mysqli($host, $user, $password, $dbname);
+
 if ($conn->connect_error) {
     die("Erro na conexão: " . $conn->connect_error);
 }
 
-// Consulta ao banco para buscar os produtos
-$sql = "SELECT id, marca, colecao, nome_da_cor, quantidade, data_de_cadastro FROM produto_estoque";
+
+$search = isset($_GET['search']) ? $_GET['search'] : '';
+
+
+$searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+
+
+$sql = "SELECT id, marca, colecao, nome_da_cor, quantidade, data_de_cadastro FROM produto_estoque WHERE 1=1";
+
+
+if ($searchTerm != '') {
+    $searchTerm = $conn->real_escape_string($searchTerm);
+    $sql .= " AND (marca LIKE '%$searchTerm%' OR colecao LIKE '%$searchTerm%' OR nome_da_cor LIKE '%$searchTerm%')";
+}
+
 $result = $conn->query($sql);
 ?>
 
@@ -24,7 +38,15 @@ $result = $conn->query($sql);
 </head>
 <body>
 
-<h2>Estoque de Produtos</h2>   
+<h2>Estoque de Produtos</h2> 
+
+<!-- Barra de Pesquisa -->
+<form method="GET" action="">
+    <input type="text" name="search" value="<?php echo $search; ?>" placeholder="Pesquisar pelo nome da cor...">
+    <input type="submit" value="Pesquisar">
+</form>
+<br>
+
 <a href="add.php"><button>Adicionar Produto</button></a>
 <br><br>
 
@@ -66,3 +88,4 @@ $result = $conn->query($sql);
 
 </body>
 </html>
+
